@@ -1,0 +1,10 @@
+table_set_default cIngress.vlan_parse_exact drop
+
+table_add cIngress.vlan_parse_exact mac_forward 00:04:00:00:00:00 => 00:04:00:00:00:01 2
+table_add cIngress.vlan_parse_exact mac_forward 00:04:00:00:00:01 => 00:04:00:00:00:00 1
+
+table_add cIngress.add_vlanTag_exact add_vlanTag 00:04:00:00:00:00 => 00:04:00:00:00:01 2 255
+table_add cIngress.add_vlanTag_exact add_vlanTag 00:04:00:00:00:01 => 00:04:00:00:00:00 1 255
+
+table_add cEgress.remove_vlanTag_exact remove_vlanTag 0 =>
+table_add cEgress.remove_vlanTag_exact remove_vlanTag 1 =>
